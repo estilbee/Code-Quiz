@@ -18,8 +18,11 @@ var questionTitle = document.querySelector("#questionTitle")
 var questionChoices = document.querySelector("#questionChoices")
 var endScreen = document.querySelector("#endScreen")
 var start = document.querySelector("#start")
-var timeLeft = 25
+var questionResults = document.querySelector("#question-results")
+var timeLeft = 60
 var questionIndex = 0
+var currentScore = 0
+var timeInterval = 0
 
 //need to keep a count of the question that is displayed 
 //need to keep score
@@ -33,16 +36,28 @@ start.addEventListener("click", countdown)
 
 function countdown() {
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         if (timeLeft > 0) {
             timeLeft = timeLeft - 1
             timerEl.textContent = timeLeft
 
         }
+        else {
+        //need function: enter name for highscore once time is up
+        }
+      
+        
     }, 1000)
     start.setAttribute("class", "hide")
     questionsDiv.removeAttribute("class")
     addQuestion()
+}
+
+function highScorePage(){
+    if (timeLeft === 0) {
+        clearInterval(timerEl);
+        endScreen.removeAttribute("class");
+}
 }
 
 var quizQuestions = [
@@ -82,15 +97,26 @@ currentQuestion.choices.forEach(function(index){
 
 function checkQuestions(){
  if (this.value === quizQuestions[questionIndex].answer){
-    console.log("correct!")
+    questionResults.textContent="correct!" 
+    //wait 2 seconds and then remove correct
+    setTimeout(function() {
+        questionResults.textContent="" 
+    }, 2000);
+
+    currentScore = currentScore + 5
+    console.log(currentScore)
  }
 else {
-    console.log("incorrect!")
+    questionResults.textContent="incorrect!" 
+    setTimeout(function() {
+        questionResults.textContent="" 
+    }, 2000);
     timeLeft = timeLeft -2
     timerEl.textContent= timeLeft
 }
 questionIndex ++ 
 addQuestion()
+
 }
 
 
@@ -121,10 +147,10 @@ addQuestion()
 
 //when I click the start button
 function startQuiz() {
-    //Timer starts and i am presented with a question 
-    //need a function call to start the timer 
+//     //Timer starts and i am presented with a question 
+//     //need a function call to start the timer 
 
-    //need a function call to present the question 
+//     //need a function call to present the question 
 }
 
 //eventListener here // when i click the start button

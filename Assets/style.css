@@ -1,3 +1,16 @@
 .hide {
     display: none
 }
+
+h1 {
+   text-align: center;
+}
+
+h2 #countdown {
+   text-align: right;
+
+}
+
+#start{
+    background-color: rgb(228, 195, 88);
+}

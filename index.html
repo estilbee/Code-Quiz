@@ -8,8 +8,9 @@
     <link rel = "stylesheet" href = "Assets/style.css" />
 </head>
 <body>
+    <a href = "#">High Score</a>
     <h1> Welcome to the Code Quiz! </h1>
-    <h2 id= "countdown">25</h2>
+    <h2 id= "countdown">60</h2>
 
     <div>
         <button id="start">Start</button>
@@ -18,9 +19,22 @@
         <div id="questionTitle">Questions Here</div>
         <div id="questionChoices"></div>
     </div>
+    <div id= "question-results"></div>
+
     <div id="endScreen" class = "hide"> 
-        This is the end screen :)
+        Name <input type="text" name="name" id="name-input">
+        Your Score <span id="yourscore"></span>
     </div>
+
+    <div id="highscores" class = "hide"> 
+       Highscores 
+       <ul>
+        <li>
+
+        </li>
+       </ul>
+    </div>
+
 <script src="./Assets/script.js"></script> 
 
 </body>
