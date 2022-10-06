@@ -12,26 +12,23 @@
 // THEN I can save my initials and score
 
 
-//need a collection of objects that hold the questions
 var questionsDiv = document.querySelector("#questionsDiv")
 var questionTitle = document.querySelector("#questionTitle")
 var questionChoices = document.querySelector("#questionChoices")
 var endScreen = document.querySelector("#endScreen")
 var start = document.querySelector("#start")
 var questionResults = document.querySelector("#question-results")
-var timeLeft = 60
+var timeLeft = 5
 var questionIndex = 0
 var currentScore = 0
 var timeInterval = 0
-
-//need to keep a count of the question that is displayed 
-//need to keep score
-
-//need to keep the time 
+var nameInput = document.querySelector("#name-input")
+var yourScore = document.querySelector("#yourscore")
 var timerEl = document.getElementById('countdown')
+var saveEl = document.querySelector("#save")
 
 
-//for all the buttons, add eventListener 
+ 
 start.addEventListener("click", countdown)
 
 function countdown() {
@@ -43,9 +40,17 @@ function countdown() {
 
         }
         else {
-        //need function: enter name for highscore once time is up
+            //need function: enter name for highscore once time is up
+            endScreen.classList.remove("hide")
+            questionsDiv.classList.add("hide")
+            nameInput.value
+            yourScore = currentScore
+            localStorage.setItem("name", "score")
+            saveEl.addEventListener("click", function(){
+                var name= nameInput.value
+                console.log(name)
+            })
         }
-      
         
     }, 1000)
     start.setAttribute("class", "hide")
@@ -53,12 +58,22 @@ function countdown() {
     addQuestion()
 }
 
-function highScorePage(){
-    if (timeLeft === 0) {
-        clearInterval(timerEl);
-        endScreen.removeAttribute("class");
-}
-}
+// // starts our todo list
+// function init() {
+//     // gets the stored todo list from localstorage and puts it into a variable
+//     var storedTodos = JSON.parse(localStorage.getItem("todos"));
+//     // just make we have data before we try to use it as a list, otherwise, todos will stay empty like above
+//     if (storedTodos !== null) {
+//       todos = storedTodos;
+//     }
+//     // calls renderTodos, allows you to run lines 10-27, so we can see the todos on the page
+//     renderTodos();
+//   }
+  
+//   function storeTodos() {
+//     // store the todos as a JSON string
+//     localStorage.setItem("todos", JSON.stringify(todos));
+//   }
 
 var quizQuestions = [
 
@@ -74,6 +89,8 @@ var quizQuestions = [
         answer: "parentheses"
 
     }
+
+
 
 ]
 
@@ -122,7 +139,6 @@ addQuestion()
 
 
 //modify the text/attributes
-//modify one of the attributes to say right or wrong 
 
 //append all elements to something on the page
 
@@ -143,14 +159,3 @@ addQuestion()
 
 //if there are no other questions.
 //go to highscore screen 
-
-
-//when I click the start button
-function startQuiz() {
-//     //Timer starts and i am presented with a question 
-//     //need a function call to start the timer 
-
-//     //need a function call to present the question 
-}
-
-//eventListener here // when i click the start button
