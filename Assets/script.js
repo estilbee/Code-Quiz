@@ -26,7 +26,7 @@ var nameInput = document.querySelector("#name-input")
 var yourScore = document.querySelector("#yourscore")
 var timerEl = document.getElementById('countdown')
 var saveEl = document.querySelector("#save")
-
+var highScoresArr = [];
 
  
 start.addEventListener("click", countdown)
@@ -45,10 +45,15 @@ function countdown() {
             questionsDiv.classList.add("hide")
             nameInput.value
             yourScore = currentScore
-            localStorage.setItem("name", "score")
             saveEl.addEventListener("click", function(){
                 var name= nameInput.value
                 console.log(name)
+                var scoreData = {
+                    name: nameInput.value, 
+                    score: yourScore
+                }
+                            highScoresArr.push(scoreData);
+                    storedHighScores()
             })
         }
         
@@ -58,22 +63,23 @@ function countdown() {
     addQuestion()
 }
 
-// // starts our todo list
-// function init() {
-//     // gets the stored todo list from localstorage and puts it into a variable
-//     var storedTodos = JSON.parse(localStorage.getItem("todos"));
-//     // just make we have data before we try to use it as a list, otherwise, todos will stay empty like above
-//     if (storedTodos !== null) {
-//       todos = storedTodos;
-//     }
-//     // calls renderTodos, allows you to run lines 10-27, so we can see the todos on the page
+// starts our todo list
+function init() {
+    // gets the stored todo list from localstorage and puts it into a variable
+    var storeHighScores= JSON.parse(localStorage.getItem("highscores"));
+    // just make we have data before we try to use it as a list, otherwise, todos will stay empty like above
+    if (storeHighScores !== null) {
+      highScoresArr = storeHighScores;
+    }
+    // calls renderTodos, allows you to run lines 10-27, so we can see the todos on the page
 //     renderTodos();
-//   }
+}
   
-//   function storeTodos() {
-//     // store the todos as a JSON string
-//     localStorage.setItem("todos", JSON.stringify(todos));
-//   }
+  function storedHighScores() {
+    // store the todos as a JSON string
+    localStorage.setItem("highscores", JSON.stringify(highScoresArr));
+  }
+
 
 var quizQuestions = [
 
