@@ -18,7 +18,7 @@ var questionChoices = document.querySelector("#questionChoices")
 var endScreen = document.querySelector("#endScreen")
 var start = document.querySelector("#start")
 var questionResults = document.querySelector("#question-results")
-var timeLeft = 5
+var timeLeft = 15
 var questionIndex = 0
 var currentScore = 0
 var timeInterval = 0
@@ -49,11 +49,11 @@ function countdown() {
                 var name= nameInput.value
                 console.log(name)
                 var scoreData = {
-                    name: nameInput.value, 
-                    score: yourScore
-                }
-                            highScoresArr.push(scoreData);
-                    storedHighScores()
+                 name: nameInput.value, 
+                 score: yourScore
+}
+            highScoresArr.push(scoreData);
+    storedHighScores()
             })
         }
         
@@ -65,18 +65,18 @@ function countdown() {
 
 // starts our todo list
 function init() {
-    // gets the stored todo list from localstorage and puts it into a variable
+    // gets the stored highscore list from localstorage and puts it into a variable
     var storeHighScores= JSON.parse(localStorage.getItem("highscores"));
     // just make we have data before we try to use it as a list, otherwise, todos will stay empty like above
     if (storeHighScores !== null) {
       highScoresArr = storeHighScores;
     }
-    // calls renderTodos, allows you to run lines 10-27, so we can see the todos on the page
-//     renderTodos();
+    // allows you to see highscores on the page
+    renderscoreData()
 }
   
   function storedHighScores() {
-    // store the todos as a JSON string
+    // store the highscores as a JSON string
     localStorage.setItem("highscores", JSON.stringify(highScoresArr));
   }
 
@@ -94,9 +94,28 @@ var quizQuestions = [
         choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
         answer: "parentheses"
 
-    }
+    },
 
+    {
+        title: "What is the default behavior called that is used to move declarations to the top of the current scope?",
+        choices: ["hoisting", "jumping", "sorting", "arranging"],
+        answer: "hoisting"
 
+    },
+
+    {
+        title: "Where is the JavaScript placed inside an HTML document or page?",
+        choices: ["<footer> section", "<body> section", "<head> section", "<title> section"],
+        answer: "<footer> section"
+
+    },
+
+    {
+        title: "What are the CSS properties that are used to add space around sections of content?",
+        choices: ["spacing", "cushion", "break", "padding"],
+        answer: "padding"
+
+    },
 
 ]
 
@@ -142,26 +161,3 @@ addQuestion()
 
 }
 
-
-
-//modify the text/attributes
-
-//append all elements to something on the page
-
-
-
-//WHEN i answer a questions 
-//if answered correctly
-//add points 
-//Show as correct
-//THEN i am presented with another question 
-//WHEN i answer the question incorrectly 
-//THEN time is subtracted from the clock
-
-//after the answer, 
-//THEN i am presented with another questions 
-//add points
-
-
-//if there are no other questions.
-//go to highscore screen 
