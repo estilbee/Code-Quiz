@@ -27,7 +27,8 @@ var yourScore = document.querySelector("#yourscore")
 var timerEl = document.getElementById('countdown')
 var saveEl = document.querySelector("#save")
 var highScoresArr = [];
-
+var showHighScores = document.querySelector("#highscores")
+var highScoreList = document.querySelector("#highscorelist")
  
 start.addEventListener("click", countdown)
 
@@ -39,12 +40,19 @@ function countdown() {
             timerEl.textContent = timeLeft
 
         }
+        
+           
+    
         else {
             //need function: enter name for highscore once time is up
+            clearInterval(timeInterval)
+            renderScoreData()
             endScreen.classList.remove("hide")
             questionsDiv.classList.add("hide")
+            showHighScores.textContent = "Your score is:" + currentScore
             nameInput.value
             yourScore = currentScore
+            
             saveEl.addEventListener("click", function(){
                 var name= nameInput.value
                 console.log(name)
@@ -63,18 +71,25 @@ function countdown() {
     addQuestion()
 }
 
-// starts our todo list
-function init() {
-    // gets the stored highscore list from localstorage and puts it into a variable
-    var storeHighScores= JSON.parse(localStorage.getItem("highscores"));
-    // just make we have data before we try to use it as a list, otherwise, todos will stay empty like above
-    if (storeHighScores !== null) {
-      highScoresArr = storeHighScores;
-    }
-    // allows you to see highscores on the page
-    renderscoreData()
-}
   
+function renderScoreData(){
+    // storeHighScores.innerHTML = "";
+    // highScoresArr.textContent = scoreData.length
+    var highScoresArr = JSON.parse(localStorage.getItem("highscores"))||[]
+    var scoreList = document.querySelector("#scoreList")
+    highScoreList.removeAttribute("class")
+    for (var i = 0; i < highScoresArr.length; i ++){
+        var highScores = highScoresArr[i];
+
+        var li = document.createElement("li");
+        li.textContent = "Name:" + highScores.name + " Score:" + highScores.score;
+        li.setAttribute("data-index", i)
+        scoreList.appendChild(li);
+    
+    }
+    
+}
+
   function storedHighScores() {
     // store the highscores as a JSON string
     localStorage.setItem("highscores", JSON.stringify(highScoresArr));
@@ -160,4 +175,5 @@ questionIndex ++
 addQuestion()
 
 }
+
 
