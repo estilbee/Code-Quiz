@@ -29,10 +29,14 @@ var saveEl = document.querySelector("#save")
 var highScoresArr = [];
 var showHighScores = document.querySelector("#highscores")
 var highScoreList = document.querySelector("#highscorelist")
- 
+var highScoreButton = document.querySelector("#high-score-button")
+
 start.addEventListener("click", countdown)
+highScoreButton.addEventListener("click",renderScoreData)
+
 
 function countdown() {
+    highScoreList.classList.add("hide")
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     timeInterval = setInterval(function () {
         if (timeLeft > 0) {
@@ -40,11 +44,8 @@ function countdown() {
             timerEl.textContent = timeLeft
 
         }
-        
-           
-    
+
         else {
-            //need function: enter name for highscore once time is up
             clearInterval(timeInterval)
             renderScoreData()
             endScreen.classList.remove("hide")
@@ -52,48 +53,50 @@ function countdown() {
             showHighScores.textContent = "Your score is:" + currentScore
             nameInput.value
             yourScore = currentScore
-            
-            saveEl.addEventListener("click", function(){
-                var name= nameInput.value
+
+            saveEl.addEventListener("click", function () {
+                var name = nameInput.value
                 console.log(name)
                 var scoreData = {
-                 name: nameInput.value, 
-                 score: yourScore
-}
-            highScoresArr.push(scoreData);
-    storedHighScores()
+                    name: nameInput.value,
+                    score: yourScore
+                }
+                highScoresArr.push(scoreData);
+                storedHighScores()
             })
         }
-        
+
     }, 1000)
     start.setAttribute("class", "hide")
     questionsDiv.removeAttribute("class")
     addQuestion()
 }
 
-  
-function renderScoreData(){
-    // storeHighScores.innerHTML = "";
+
+function renderScoreData() {
+    // highScoreList.innerHTML = "";
     // highScoresArr.textContent = scoreData.length
-    var highScoresArr = JSON.parse(localStorage.getItem("highscores"))||[]
+    highScoresArr = []
+    highScoresArr = JSON.parse(localStorage.getItem("highscores")) || []
     var scoreList = document.querySelector("#scoreList")
+    scoreList.innerHTML = ""
     highScoreList.removeAttribute("class")
-    for (var i = 0; i < highScoresArr.length; i ++){
+    for (var i = 0; i < highScoresArr.length; i++) {
         var highScores = highScoresArr[i];
 
         var li = document.createElement("li");
         li.textContent = "Name:" + highScores.name + " Score:" + highScores.score;
         li.setAttribute("data-index", i)
         scoreList.appendChild(li);
-    
+
     }
-    
+
 }
 
-  function storedHighScores() {
+function storedHighScores() {
     // store the highscores as a JSON string
     localStorage.setItem("highscores", JSON.stringify(highScoresArr));
-  }
+}
 
 
 var quizQuestions = [
@@ -137,42 +140,42 @@ var quizQuestions = [
 
 
 function addQuestion() {
-  var currentQuestion = quizQuestions[questionIndex]
-  questionChoices.innerHTML=""
-  questionTitle.textContent= currentQuestion.title
-currentQuestion.choices.forEach(function(index){
-    var choiceButton = document.createElement("button")
-    choiceButton.textContent= index
-    choiceButton.setAttribute("class", "buttonStyle" )
-    choiceButton.setAttribute("value", index)
-    choiceButton.onclick= checkQuestions
-// add click event that checks value and compares to answer
-    questionChoices.append(choiceButton)
-})
+    var currentQuestion = quizQuestions[questionIndex]
+    questionChoices.innerHTML = ""
+    questionTitle.textContent = currentQuestion.title
+    currentQuestion.choices.forEach(function (index) {
+        var choiceButton = document.createElement("button")
+        choiceButton.textContent = index
+        choiceButton.setAttribute("class", "buttonStyle")
+        choiceButton.setAttribute("value", index)
+        choiceButton.onclick = checkQuestions
+        // add click event that checks value and compares to answer
+        questionChoices.append(choiceButton)
+    })
 
 }
 
-function checkQuestions(){
- if (this.value === quizQuestions[questionIndex].answer){
-    questionResults.textContent="correct!" 
-    //wait 2 seconds and then remove correct
-    setTimeout(function() {
-        questionResults.textContent="" 
-    }, 2000);
+function checkQuestions() {
+    if (this.value === quizQuestions[questionIndex].answer) {
+        questionResults.textContent = "correct!"
+        //wait 2 seconds and then remove correct
+        setTimeout(function () {
+            questionResults.textContent = ""
+        }, 2000);
 
-    currentScore = currentScore + 5
-    console.log(currentScore)
- }
-else {
-    questionResults.textContent="incorrect!" 
-    setTimeout(function() {
-        questionResults.textContent="" 
-    }, 2000);
-    timeLeft = timeLeft -2
-    timerEl.textContent= timeLeft
-}
-questionIndex ++ 
-addQuestion()
+        currentScore = currentScore + 5
+        console.log(currentScore)
+    }
+    else {
+        questionResults.textContent = "incorrect!"
+        setTimeout(function () {
+            questionResults.textContent = ""
+        }, 2000);
+        timeLeft = timeLeft - 2
+        timerEl.textContent = timeLeft
+    }
+    questionIndex++
+    addQuestion()
 
 }
 
