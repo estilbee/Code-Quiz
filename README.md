@@ -6,7 +6,7 @@ This is a quick quiz to test your coding skills! When you open the web applicati
 
 ## Project Preview 
 
-![codequiz](assets/codequiz.PNG)
+![codequiz](./Assets/codequiz.PNG)
 
 ## Project Link
 
