@@ -146,7 +146,7 @@ function addQuestion() {
     currentQuestion.choices.forEach(function (index) {
         var choiceButton = document.createElement("button")
         choiceButton.textContent = index
-        choiceButton.setAttribute("class", "buttonStyle")
+        choiceButton.setAttribute("class", "btn btn-outline-secondary")
         choiceButton.setAttribute("value", index)
         choiceButton.onclick = checkQuestions
         // add click event that checks value and compares to answer
