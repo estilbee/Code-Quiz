@@ -18,7 +18,7 @@ var questionChoices = document.querySelector("#questionChoices")
 var endScreen = document.querySelector("#endScreen")
 var start = document.querySelector("#start")
 var questionResults = document.querySelector("#question-results")
-var timeLeft = 15
+var timeLeft = 5
 var questionIndex = 0
 var currentScore = 0
 var timeInterval = 0
@@ -50,7 +50,7 @@ function countdown() {
             renderScoreData()
             endScreen.classList.remove("hide")
             questionsDiv.classList.add("hide")
-            showHighScores.textContent = "Your score is:" + currentScore
+            showHighScores.textContent = "Your score is: " + currentScore
             nameInput.value
             yourScore = currentScore
 
@@ -85,7 +85,7 @@ function renderScoreData() {
         var highScores = highScoresArr[i];
 
         var li = document.createElement("li");
-        li.textContent = "Name:" + highScores.name + " Score:" + highScores.score;
+        li.textContent = "Name: " + highScores.name + " Score: " + highScores.score;
         li.setAttribute("data-index", i)
         scoreList.appendChild(li);
 
